@@ -26,16 +26,18 @@ class DataValSet(data.Dataset):
         self.root = root
         self.mean = mean
         self.isReal = isReal
-        self.input_dir = os.path.join(self.root, 'HR_hazy')
+        # self.input_dir = os.path.join(self.root, 'HR_hazy')
+        self.input_dir = self.root
+        
         #self.target_lr_dir = os.path.join(self.root, 'LR')
-        self.target_dir = os.path.join(self.root, 'HR')
+        self.target_dir = self.root
 
 
         # for split in ["train", "trainval", "val"]:
-        self.input_ids = [x for x in sorted(os.listdir(self.input_dir)) if is_image_file(x)]
+        self.input_ids = [x for x in sorted(self.input_dir) if is_image_file(x)]
        # self.target_lr_ids = [x for x in sorted(os.listdir(self.target_lr_dir)) if is_image_file(x)]
         if not self.isReal:
-            self.target_ids = [x for x in sorted(os.listdir(self.target_dir)) if is_image_file(x)]
+            self.target_ids = [x for x in sorted(self.target_dir) if is_image_file(x)]
 
     def __len__(self):
         return len(self.input_ids)
